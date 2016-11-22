@@ -61,8 +61,19 @@
         width: 345px;
       }
     </style>
+      <script>
+  	function getAllImages() {
+  		// connect to db and get all images uploaded
+  		var url = "http://geopix-bengineering.rhcloud.com/allimages";
+  		$.get(url, function(data, status)) {
+  			console.log("Response received! " + status);
+  			console.log(JSON.parse(JSON.stringify(data)));
+  		}
+
+  	}
+  </script>
   </head>
-  <body>
+  <body onload="getAllImages()">
 	<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
