@@ -118,8 +118,11 @@
 	  					var lat = currentImage["location"]["coordinates"][0];
 	  					var lng = currentImage["location"]["coordinates"][1];
 	  					var imgPath = currentImage["filePath"];
-
-	  					console.log(map);
+	  					var newMarker = new google.maps.Marker({
+	  						position: new google.maps.LatLng(lat, lng),
+	  						map: map,
+	  						icon: imgPath
+	  					});
 	  				}
 	  			},
 	  			error: function(e) {
