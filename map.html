@@ -98,7 +98,7 @@
 	  					});
 	  				}
 	  				for (var i = 0, feature; feature = features[i]; i++) {
-          				addMarker(feature);
+          				// addMarker(feature);
         			}
 	  			},
 	  			error: function(e) {
@@ -178,11 +178,11 @@
             return;
           }
 
-          // Clear out the old markers. //Surudh was here
-          // markers.forEach(function(marker) {
-          //   marker.setMap(null);
-          // });
-          // markers = [];
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
 
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
