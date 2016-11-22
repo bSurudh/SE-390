@@ -1,26 +1,26 @@
 <DOCTYPE html>
 <html>
-	<head>
-		<title>My Pictures</title>
-		<!-- Bootstrap Core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <head>
+        <title>My Pictures</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-	    <!-- Custom CSS -->
-	    <link href="css/landing-page.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="css/landing-page.css" rel="stylesheet">
 
-	    <!-- Custom Fonts -->
-	    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <!-- Custom Fonts -->
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-	    <!--<script type="text/javascript">
-	    	if(document.cookie.indexOf('id_token') == -1) {
-	    		window.location = "https://bsurudh.github.io";
-	    	}
-	    </script>-->
-	</head>
+        <!--<script type="text/javascript">
+            if(document.cookie.indexOf('id_token') == -1) {
+                window.location = "https://bsurudh.github.io";
+            }
+        </script>-->
+    </head>
 
-	<body>
-		<!-- Navigation -->
+    <body>
+        <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -53,27 +53,64 @@
     </nav>
 
     <div class="container">
-      <h2>.</h2>	
+      <h2>.</h2>    
       <h2>My Pictures</h2>
       <table class="table table-hover">
-    	<thead>
-      	  <tr>
-      	    <th>Picture</th>
+        <thead>
+          <tr>
+            <th>Picture</th>
             <th>Timestamp</th>
             <th>Rating</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-        	<tr>
-        	  <td style="vertical-align: middle;">
-        	  	<img src='http://vignette2.wikia.nocookie.net/pokemon/images/b/b1/025Pikachu_XY_anime_3.png' style="width: 150px; height: 200px">
-        	  </td>
-        	  <td style="vertical-align: middle;">June 4, 2016</td>
-        	  <td style="vertical-align: middle;">3.8</td>
-        	  <td style="vertical-align: middle;"><button type="button" class="btn btn-primary">Delete</button></td>
-        	</tr>
+            <tr>
+              <td style="vertical-align: middle;">
+                <img src='http://vignette2.wikia.nocookie.net/pokemon/images/b/b1/025Pikachu_XY_anime_3.png' style="width: 150px; height: 200px">
+              </td>
+              <td style="vertical-align: middle;">June 4, 2016</td>
+              <td style="vertical-align: middle;">3.8</td>
+              <td style="vertical-align: middle;"><button type="button" class="btn btn-primary">Delete</button></td>
+            </tr>
         </tbody>
     </div>
-	</body>
+
+    <script>
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length,c.length);
+            }
+        }
+        return "";
+      }
+      
+      var baseURL = "https://geopix-bengineering.rhcloud.com/images/user";
+      var userID = getCookie("id_token");
+      var photos = "";
+      jQuery.ajax({
+            url: baseURL,
+            type: "GET",
+            dataType: "JSON",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("authorization", "Bearer: " + userID);
+            },
+            success: function(data) {
+                console.log(JSON.parse(JSON.stringify(data)));
+            },
+            error: function(e,t) {
+                console.log("AJAX friends request failed: " + t + " " + e);
+            }
+        });
+    </script>
+    </body>
+</html>
+>
 </html>
