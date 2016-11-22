@@ -98,7 +98,7 @@
                     console.log(JSON.parse(JSON.stringify(data)));
                 },
                 error: function(e,t) {
-                    console.log("AJAX request failed: " + t + " " + e);
+                    console.log("AJAX allusers request failed: " + t + " " + e);
                 }
             });
         </script>
@@ -131,6 +131,7 @@
         var baseURL = "https://geopix-bengineering.rhcloud.com/friends/";
         var userID = getCookie("id_token");
         var friendsList = "";
+        console.log(baseURL+userID);
         var myFriends = jQuery.ajax({
             url: baseURL+userID,
             type: "GET",
@@ -141,9 +142,10 @@
                 // parse it to get a name
                 // fill field with name
                 friendsList += '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
+
             },
             error: function(e,t) {
-                console.log("AJAX request failed: " + t + " " + e);
+                console.log("AJAX friends request failed: " + t + " " + e);
             }
         });
       </script>
