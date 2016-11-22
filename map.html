@@ -258,7 +258,9 @@
           marker.addListener('click', function() {
           	modal.style.display = "block";
     		modalImg.src = feature.icon.url;
+            console.log(JSON.parse(JSON.stringify(rating)));
           });
+
         }
 
         var span = document.getElementsByClassName("close")[0];
@@ -284,6 +286,7 @@
         			console.log(lat);
         			var lng = currImage["location"]["coordinates"][1];
         			var imgPath = currImage["filePath"];
+                    var rating = currImage["rating"];
         			var name = currImage["_id"];
         			// get the filepath of the image
         			console.log(baseURL+name);
@@ -295,7 +298,8 @@
         					scaledSize: new google.maps.Size(30,30),
         					origin: new google.maps.Point(0,0), // origin
     						anchor: new google.maps.Point(0, 0) // anchor
-        				}
+        				},
+                        stars: rating
         			});
         		}
         		console.log("features length: " + features.length);
