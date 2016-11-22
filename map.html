@@ -84,7 +84,12 @@
         			// nestedAjaxCall(baseURL+name);
         			features.push({
         				position: new google.maps.LatLng(lat, lng),
-        				icon: baseURL+name
+        				icon: {
+        					url: baseURL+name,
+        					scaledSize: new google.maps.Size(50,50),
+        					origin: new google.maps.Point(0,0), // origin
+    						anchor: new google.maps.Point(0, 0) // anchor
+        				}
         			});
         		}
         		console.log("features length: " + features.length);
