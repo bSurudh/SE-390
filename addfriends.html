@@ -144,6 +144,7 @@
                 contentType: "text/plain",
                 success: function(data) {
                     console.log(JSON.parse(JSON.stringify(data)));
+                    console.log("data[name] = " + data["name"]);
                     return data["name"];
                 },
                 error: function(e,t) {
