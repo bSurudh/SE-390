@@ -307,21 +307,6 @@
         		console.log("AJAX request failed: " + e);
         	}
         });
-
-		function nestedAjaxCall(url) {
-			jQuery.ajax({
-				url: url,
-				type: "GET",
-				dataType: "image/png",
-				contentType: "image/png",
-				success: function(data) {
-					console.log(JSON.parse(JSON.stringify(data)));
-				},
-				error: function(e) {
-					console.log("Nested AJAX request failed: " + e);
-				}
-			});
-		}
       }
     </script>
     <script async defer
