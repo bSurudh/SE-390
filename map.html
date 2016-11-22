@@ -61,54 +61,6 @@
         width: 345px;
       }
     </style>
-       <!--script>
-  //       var map = new google.maps.Map(document.getElementById('map'), {
-  //         center: initialLocation,
-  //         zoom: 13,
-  //         mapTypeId: 'roadmap'
-  //       });
-  //     function addMarker(feature) {
-  //         var marker = new google.maps.Marker({
-  //           position: feature.position,
-  //           icon: feature.type,
-  //           map: map
-  //         });
-  //       }
-
-	 //  	function getAllImages() {
-	 //  		// connect to db and get all images uploaded
-	 //  		console.log("getting all images...");
-	 //  		var url = "https://geopix-bengineering.rhcloud.com/allimages";
-	 //  		var request = jQuery.ajax({
-	 //  			url: url,
-	 //  			type: "GET",
-	 //  			dataType: "JSON",
-	 //  			contentType: "text/plain",
-	 //  			success: function(data) {
-	 //  				console.log(JSON.parse(JSON.stringify(data)));
-	 //  				// parse json object to get attributes
-
-	 //  				// for each json object, check if location exists
-	 //  				// else create a fake location 
-	 //  				var numImages = data.length;
-	 //  				for(var i =0; i < data.length; i++) {
-	 //  					var currentImage = data[i];
-	 //  					var lat = currentImage["location"]["coordinates"][0];
-	 //  					var lng = currentImage["location"]["coordinates"][1];
-	 //  					var imgPath = currentImage["filePath"];
-
-	 //  					addMarker({
-	 //  						position: new google.maps.LatLng(lat,lng),
-	 //  						type: imgPath
-	 //  					});
-	 //  				}
-	 //  			},
-	 //  			error: function(e) {
-	 //  				console.log("Ajax request failed: " + e);
-	 //  			}
-	 //  		});
-	 //  	}
-  // </script-->
   </head>
   <body onload="getAllImages()">
 	<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
