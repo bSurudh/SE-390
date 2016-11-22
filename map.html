@@ -73,7 +73,7 @@
         			var lng = data["location"]["coordinates"][1];
         			var imgPath = data["filePath"];
         			features.push({
-        				position: new google.maps.LatLng(lat, lng);
+        				position: new google.maps.LatLng(lat, lng),
         				type: imgPath
         			});
         		}
