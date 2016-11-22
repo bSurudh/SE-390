@@ -70,6 +70,7 @@
         	contentType: "text/plain",
         	success: function(data) {
         		console.log(JSON.parse(JSON.stringify(data)));
+        		var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
         		// work with json data to create features
         		for(var i = 0; i < data.length; i++) {
         			var currImage = data[i];
@@ -77,10 +78,25 @@
         			console.log(lat);
         			var lng = currImage["location"]["coordinates"][1];
         			var imgPath = currImage["filePath"];
-        			features.push({
-        				position: new google.maps.LatLng(lat, lng),
-        				type: imgPath
+        			var name = currImage["_id"];
+        			// get the filepath of the image
+        			var nestedQuery = jQuery.ajax({
+        				url: baseURL+name,
+        				type: "GET",
+        				dataType: "JSON",
+        				contentType: "text/plain",
+        				success: function(obj) {
+        					console.log(JSON.parse(JSON.stringify(obj)));
+        					// features.push({
+        					// 	position: new google.maps.LatLng(lat, lng),
+        					// });
+        				}
         			});
+
+        			// features.push({
+        			// 	position: new google.maps.LatLng(lat, lng),
+        			// 	id: name
+        			// });
         		}
         		console.log("features length: " + features.length);
         		for (var i = 0, feature; feature = features[i]; i++) {
