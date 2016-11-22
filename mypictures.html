@@ -20,6 +20,41 @@
     </head>
 
     <body>
+
+    <script>
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length,c.length);
+            }
+        }
+        return "";
+      }
+      
+      var baseURL = "https://geopix-bengineering.rhcloud.com/images/user";
+      var userID = getCookie("id_token");
+      var photos = "";
+      jQuery.ajax({
+            url: baseURL,
+            type: "GET",
+            dataType: "JSON",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("authorization", "Bearer: " + userID);
+            },
+            success: function(data) {
+                console.log(JSON.parse(JSON.stringify(data)));
+            },
+            error: function(e,t) {
+                console.log("AJAX friends request failed: " + t + " " + e);
+            }
+        });
+    </script>
         <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
@@ -75,41 +110,6 @@
             </tr>
         </tbody>
     </div>
-
-    <script>
-      function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length,c.length);
-            }
-        }
-        return "";
-      }
-      
-      var baseURL = "https://geopix-bengineering.rhcloud.com/images/user";
-      var userID = getCookie("id_token");
-      var photos = "";
-      jQuery.ajax({
-            url: baseURL,
-            type: "GET",
-            dataType: "JSON",
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("authorization", "Bearer: " + userID);
-            },
-            success: function(data) {
-                console.log(JSON.parse(JSON.stringify(data)));
-            },
-            error: function(e,t) {
-                console.log("AJAX friends request failed: " + t + " " + e);
-            }
-        });
-    </script>
     </body>
 </html>
 >
