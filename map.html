@@ -62,7 +62,6 @@
       }
     </style>
       <script>
-      var map;
       function addMarker(feature) {
           var marker = new google.maps.Marker({
             position: feature.position,
@@ -142,12 +141,6 @@
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: initialLocation,
-          zoom: 13,
-          mapTypeId: 'roadmap'
-        });
-
       function initAutocomplete() {
       	initialLocation = {lat: -33.8688, lng: 151.2195};
       	 if (navigator.geolocation) {
@@ -156,6 +149,11 @@
          	map.setCenter(initialLocation);
      		});
  		}
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: initialLocation,
+          zoom: 13,
+          mapTypeId: 'roadmap'
+        });
 
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
