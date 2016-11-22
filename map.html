@@ -23,18 +23,22 @@
     <script src="js/jquery.js"></script>
     <script>
       var map;
+      var initialLocation;
       function initMap() {
-      	var initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
-      	 if (navigator.geolocation) {
-     		navigator.geolocation.getCurrentPosition(function (position) {
-         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-     		});
- 		}
+      	 initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 16,
           center: initialLocation,
           mapTypeId: 'roadmap'
         });
+
+        if (navigator.geolocation) {
+     		navigator.geolocation.getCurrentPosition(function (position) {
+         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         	console.log("set: " + initialLocation);
+         	map.setCenter(initialLocation);
+     		});
+ 		}
 
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var icons = {
@@ -80,6 +84,9 @@
         			});
         		}
         		console.log("features length: " + features.length);
+        		for (var i = 0, feature; feature = features[i]; i++) {
+          			addMarker(feature);
+        		}
         	},
         	error: function(e) {
         		console.log("AJAX request failed: " + e);
@@ -146,10 +153,6 @@
         //     type: 'library'
         //   }
         // ];
-
-        for (var i = 0, feature; feature = features[i]; i++) {
-          addMarker(feature);
-        }
       }
     </script>
     <script async defer
