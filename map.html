@@ -85,7 +85,12 @@
 
 	  				// for each json object, check if location exists
 	  				// else create a fake location 
-	  				console.log("data.length " + data.length);
+	  				var numImages = data.length;
+	  				for(var i =0; i < data.length; i++) {
+	  					var currentImage = data[i];
+	  					console.log(currentImage["location"]["coordinates"][0]);
+	  					console.log(currentImage["location"]["coordinates"][1]);
+	  				}
 	  			},
 	  			error: function(e) {
 	  				console.log("Ajax request failed: " + e);
