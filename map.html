@@ -65,6 +65,21 @@
 	    cursor: pointer;
 	}
 
+	#caption {
+	    margin: auto;
+	    display: block;
+	    width: 80%;
+	    max-width: 700px;
+	    text-align: center;
+	    color: #ccc;
+	    padding: 10px 0;
+	    height: 150px;
+	    -webkit-animation-name: zoom;
+	    -webkit-animation-duration: 0.6s;
+	    animation-name: zoom;
+	    animation-duration: 0.6s;
+	}
+
 	@media only screen and (max-width: 700px) {
 	    .modal-content {
 	        width: 100%;
@@ -93,7 +108,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#">GeoPix</a>
+                <a class="navbar-brand topnav" href="#/index.html">GeoPix</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -132,6 +147,9 @@
 
   	<!-- Modal Content (The Image) -->
   	<img class="modal-content" id="img01">
+
+  	<!-- Rating -->
+  	<div id="caption"></div> 
 	</div>
 
     <script src="js/jquery.js"></script>
@@ -168,6 +186,7 @@
 
         var modal = document.getElementById('myModal');
         var modalImg = document.getElementById("img01");
+        var rating = document.getElementById("caption");
 
         function addMarker(feature) {
           var marker = new google.maps.Marker({
