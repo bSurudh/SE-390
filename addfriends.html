@@ -130,7 +130,7 @@
     }
         var baseURL = "https://geopix-bengineering.rhcloud.com/friends/";
         var userID = getCookie("id_token");
-        var node = document.getElementsByClass("list-group")[0];
+        var node = document.getElementsByClassName("list-group")[0];
         node.innerHTML('<li href="#" class="list-group-item title">My Friends</li>');
         var friendsList = "";
         var myFriends = jQuery.ajax({
