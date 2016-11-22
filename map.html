@@ -30,8 +30,8 @@
      		navigator.geolocation.getCurrentPosition(function (position) {
 	         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	         	map.setCenter(initialLocation);
- 			}
- 		});
+ 			});
+ 		}
 
      	map = new google.maps.Map(document.getElementById('map'), {
       		zoom: 16,
