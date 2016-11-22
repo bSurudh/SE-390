@@ -62,6 +62,11 @@
       }
     </style>
       <script>
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: initialLocation,
+          zoom: 13,
+          mapTypeId: 'roadmap'
+        });
       function addMarker(feature) {
           var marker = new google.maps.Marker({
             position: feature.position,
@@ -149,11 +154,6 @@
          	map.setCenter(initialLocation);
      		});
  		}
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: initialLocation,
-          zoom: 13,
-          mapTypeId: 'roadmap'
-        });
 
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
