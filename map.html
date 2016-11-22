@@ -65,10 +65,10 @@
   	function getAllImages() {
   		// connect to db and get all images uploaded
   		var url = "http://geopix-bengineering.rhcloud.com/allimages";
-  		$.get(url, function(data, status) {
+  		$.get(url, function(data, status){
   			console.log("Response received! " + status);
   			console.log(JSON.parse(JSON.stringify(data)));
-  		)};
+  		});
 
   	}
   </script>
