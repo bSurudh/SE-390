@@ -163,9 +163,13 @@
             async: false,
             type: "GET",
             dataType: "jsonp",
-            beforeSend: function(request) {
-                request.withCredentials = true;
-                request.setRequestHeader("Authorization", "Bearer: " + userID);
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: function(request) {
+                // request.withCredentials = true;
+                // request.setRequestHeader("Authorization", "Bearer: " + userID);
+                "Authorization" : "Bearer: " + userID;
             },
             success: function(data) {
                 console.log(JSON.parse(JSON.stringify(data)));
