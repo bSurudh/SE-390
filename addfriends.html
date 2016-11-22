@@ -67,7 +67,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#">GeoPix</a>
+                <a class="navbar-brand topnav" href="/index.html">GeoPix</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -128,6 +128,26 @@
         }
         return "";
     }
+
+        function getFriendName(friendID) {
+            var baseURL = "https://geopix-bengineering.rhcloud.com/users/";
+            var realURL = baseURL+friendID;
+            jQuery.ajax({
+                url: realURL,
+                async: false,
+                type: "GET",
+                dataType: "JSON",
+                contentType: "text/plain",
+                success: function(data) {
+                    console.log(JSON.parse(JSON.stringify(data)));
+                    return data["name"];
+                },
+                error: function(e,t) {
+                    console.log("AJAX friends request failed: " + t + " " + e);
+                }
+            });
+        } 
+
         var baseURL = "https://geopix-bengineering.rhcloud.com/friends/";
         var userID = getCookie("id_token");
         console.log("userID: " + userID);
@@ -135,6 +155,7 @@
         console.log(baseURL+userID);
         var myFriends = jQuery.ajax({
             url: baseURL,
+            async: false,
             type: "GET",
             dataType: "JSON",
             beforeSend: function(xhr) {
@@ -146,7 +167,11 @@
                 // parse it to get a name
                 // fill field with name
                 friendsList += '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
-
+                for(var i = 1; i < data.length; i++) {
+                    var currFriendID = data[i];
+                    var name = getFriendName(currFriendID);
+                    console.log("FRIEND NAME: " + name);
+                }   
             },
             error: function(e,t) {
                 console.log("AJAX friends request failed: " + t + " " + e);
