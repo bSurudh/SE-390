@@ -37,15 +37,6 @@
 </head>
 
 <body>
-    <script>
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
-    }</script>
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
@@ -75,7 +66,27 @@
                         <a href="/map.html">Map</a>
                     </li>
                     <li>
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                       <div id="my-signin2"></div>
+                      <script>
+                        function onSuccess(googleUser) {
+                          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+                        }
+                        function onFailure(error) {
+                          console.log(error);
+                        }
+                        function renderButton() {
+                          gapi.signin2.render('my-signin2', {
+                            'scope': 'profile email',
+                            'width': 240,
+                            'height': 50,
+                            'longtitle': true,
+                            'theme': 'dark',
+                            'onsuccess': onSuccess,
+                            'onfailure': onFailure
+                          });
+                        }
+                      </script>
+                     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
                     </li>
                 </ul>
             </div>
