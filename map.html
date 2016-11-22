@@ -70,7 +70,7 @@
         	contentType: "text/plain",
         	success: function(data) {
         		console.log(JSON.parse(JSON.stringify(data)));
-        		var baseURL = "http://geopix-bengineering.rhcloud.com/images/";
+        		var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
         		// work with json data to create features
         		for(var i = 0; i < data.length; i++) {
         			var currImage = data[i];
