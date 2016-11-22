@@ -53,15 +53,6 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-<!--                     <li>
-                        <a href="#about">About</a>
-                    </li>
-                    <li>
-                        <a href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li> -->
                     <li>
                         <a href="/map.html">Map</a>
                     </li>
@@ -215,6 +206,9 @@
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail());
+            console.log('IDToken: ' + googleUser.getAuthResponse().id_token);
+            document.cookie = 'id_token=' + googleUser.getAuthResponse().id_token+';';
+            window.location = "https://bsurudh.github.io/map.html";
         }
 
         function onSignInFailure(error) {
