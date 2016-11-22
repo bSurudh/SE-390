@@ -210,7 +210,7 @@
             var request = jQuery.ajax({
                 url: "https://geopix-bengineering.rhcloud.com/users",
                 type: "POST",
-                data: '{"name":"'+profile.getName()+'","email":"'+profile.getEmail()+'", "token": "' + googleUser.getAuthResponse().id_token'"}',
+                data: '{"name":"'+profile.getName()+'","email":"'+profile.getEmail()+'", "token": "' + googleUser.getAuthResponse().id_token + '"}',
                 dataType: "JSON",
                 contentType: "text/plain",
                 success: function(data) {
