@@ -90,7 +90,7 @@
         <script src="js/jquery.js"></script>
         <script>
             var allUsers = jQuery.ajax({
-                url: "https://geopix-bengineering.rhcloud.com/allimages",
+                url: "https://geopix-bengineering.rhcloud.com/images/all",
                 type: "GET",
                 dataType: "JSON",
                 contentType: "text/plain",
@@ -142,10 +142,7 @@
                 // list of json objects
                 // parse it to get a name
                 // fill field with name
-                node.innerHTML += 
-                '<li href="#" class="list-group-item text-left">
-                <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
-                <label class="name">';
+                node.innerHTML += '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
             },
             error: function(e,t) {
                 console.log("AJAX request failed: " + t + " " + e);
