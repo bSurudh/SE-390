@@ -62,20 +62,36 @@
       }
     </style>
       <script>
-  	function getAllImages() {
-  		// connect to db and get all images uploaded
-  		console.log("getting all images...");
-  		var url = "https://geopix-bengineering.rhcloud.com/allimages";
-  		var request = jQuery.ajax({
-  			url: url,
-  			type: "GET",
-  			dataType: "JSON",
-  			contentType: "text/plain",
-  			success: function(data) {
-  				console.log(JSON.parse(JSON.stringify(data)));
-  			}
-  		});
-  	}
+      function addMarker(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
+          });
+        }
+
+	  	function getAllImages() {
+	  		// connect to db and get all images uploaded
+	  		console.log("getting all images...");
+	  		var url = "https://geopix-bengineering.rhcloud.com/allimages";
+	  		var request = jQuery.ajax({
+	  			url: url,
+	  			type: "GET",
+	  			dataType: "JSON",
+	  			contentType: "text/plain",
+	  			success: function(data) {
+	  				console.log(JSON.parse(JSON.stringify(data)));
+	  				// parse json object to get attributes
+
+	  				// for each json object, check if location exists
+	  				// else create a fake location 
+	  				console.log(data.length);
+	  			},
+	  			error: function(e) {
+	  				console.log("Ajax request failed: " + e);
+	  			}
+	  		});
+	  	}
   </script>
   </head>
   <body onload="getAllImages()">
