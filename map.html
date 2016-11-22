@@ -25,25 +25,19 @@
       var map;
       var initialLocation;
       function initMap() {
-      	 // initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
-        // map = new google.maps.Map(document.getElementById('map'), {
-        //   zoom: 16,
-        //   center: initialLocation,
-        //   mapTypeId: 'roadmap'
-        // });
-
+		initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
         if (navigator.geolocation) {
-        	initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
      		navigator.geolocation.getCurrentPosition(function (position) {
-         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-         	console.log("set: " + initialLocation);
-         	map = new google.maps.Map(document.getElementById('map'), {
-          		zoom: 16,
-          		center: initialLocation,
-          		mapTypeId: 'roadmap'
-        		});
-     		});
- 		}
+	         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	         	map.setCenter(initialLocation);
+ 			}
+ 		});
+
+     	map = new google.maps.Map(document.getElementById('map'), {
+      		zoom: 16,
+      		center: initialLocation,
+      		mapTypeId: 'roadmap'
+    	});
 
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var icons = {
