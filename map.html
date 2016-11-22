@@ -86,20 +86,17 @@
 	  				// for each json object, check if location exists
 	  				// else create a fake location 
 	  				var numImages = data.length;
-	  				var features = [];
 	  				for(var i =0; i < data.length; i++) {
 	  					var currentImage = data[i];
 	  					var lat = currentImage["location"]["coordinates"][0];
 	  					var lng = currentImage["location"]["coordinates"][1];
 	  					var imgPath = currentImage["filePath"];
-	  					features.push({
+
+	  					addMarker({
 	  						position: new google.maps.LatLng(lat,lng),
 	  						type: imgPath
 	  					});
 	  				}
-	  				for (var i = 0, feature; feature = features[i]; i++) {
-          				// addMarker(feature);
-        			}
 	  			},
 	  			error: function(e) {
 	  				console.log("Ajax request failed: " + e);
