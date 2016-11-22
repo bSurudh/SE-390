@@ -71,8 +71,11 @@
         		for(var i = 0; i < data.length; i++) {
         			var currImage = data[i];
         			var lat = currImage["location"]["coordinates"][0];
+        			console.log(lat);
         			var lng = currImage["location"]["coordinates"][1];
+        			console.log(lng);
         			var imgPath = currImage["filePath"];
+        			console.log(imgPath);
         			features.push({
         				position: new google.maps.LatLng(lat, lng),
         				type: imgPath
