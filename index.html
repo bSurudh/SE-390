@@ -34,6 +34,8 @@
     <!-- Google Platform Library - Sign-In -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="342888310577-n3375a4igbhi5cvodrjj73fo7s6fqeoq.apps.googleusercontent.com">
+
+    <script src="js/jquery.js"></script>
 </head>
 
 <body>
@@ -205,7 +207,19 @@
             console.log('Email: ' + profile.getEmail());
             console.log('IDToken: ' + googleUser.getAuthResponse().id_token);
             document.cookie = 'id_token=' + googleUser.getAuthResponse().id_token+';';
-            window.location = "https://bsurudh.github.io/map.html";
+            var request = jQuery.ajax({
+                url: "https://geopix-bengineering.rhcloud.com/users",
+                type: "POST",
+                data: '{"name":"'+profile.getName()+'","email":"'+profile.getEmail()+'", "token": "' + googleUser.getAuthResponse().id_token'"}',
+                dataType: "JSON",
+                contentType: "text/plain",
+                success: function(data) {
+                    window.location = "https://bsurudh.github.io/map.html";
+                },
+                error: function(data) {
+                    console.log("Error when sending Sign-In to server");
+                }
+            }
         }
 
         function onSignInFailure(error) {
