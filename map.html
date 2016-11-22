@@ -53,9 +53,19 @@
 
         // initialize features using jquery
         var request = jQuery.ajax({
-
+        	url: "https://geopix-bengineering.rhcloud.com/allimages",
+        	type: "GET",
+        	dataType: "JSON",
+        	contentType: "text/plain",
+        	success: function(data) {
+        		console.log(JSON.parse(JSON.stringify(data)));
+        		// work with json data to create features
+        	},
+        	error: function(e) {
+        		console.log("AJAX request failed: " + e);
+        	}
         });
-        
+
         var features = [
           {
             position: new google.maps.LatLng(-33.91721, 151.22630),
@@ -123,7 +133,7 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBs8bVEx2rHPlEwcENWQFFEdEEEbfFhFWg&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhjq2C26LvxCKz5d6FCFz-OPgE9nCkSzs&callback=initMap">
     </script>
   </body>
 </html>
