@@ -120,9 +120,9 @@
 	  					var imgPath = currentImage["filePath"];
 	  					var newMarker = new google.maps.Marker({
 	  						position: new google.maps.LatLng(lat, lng),
-	  						map: map,
 	  						icon: imgPath
 	  					});
+	  					newMarker.setMap(map);
 	  				}
 	  			},
 	  			error: function(e) {
