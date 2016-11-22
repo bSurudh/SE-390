@@ -211,8 +211,8 @@
                 url: "https://geopix-bengineering.rhcloud.com/users",
                 type: "POST",
                 data: '{"name":"'+profile.getName()+'","email":"'+profile.getEmail()+'", "token": "' + googleUser.getAuthResponse().id_token + '"}',
-                dataType: "JSON",
-                contentType: "text/plain",
+                dataType: "json",
+                contentType: "application/json",
                 success: function(data) {
                     window.location.href = "https://bsurudh.github.io/map.html";
                 },
