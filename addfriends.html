@@ -162,10 +162,10 @@
             url: baseURL,
             async: false,
             type: "GET",
-            dataType: "JSON",
+            dataType: "jsonp",
             beforeSend: function(request) {
-                request.withCredentials = true;
-                request.setRequestHeader("authorization", "Bearer: " + userID);
+                // request.withCredentials = true;
+                request.setRequestHeader("Authorization", "Bearer: " + userID);
             },
             success: function(data) {
                 console.log(JSON.parse(JSON.stringify(data)));
