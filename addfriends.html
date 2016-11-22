@@ -130,8 +130,6 @@
     }
         var baseURL = "https://geopix-bengineering.rhcloud.com/friends/";
         var userID = getCookie("id_token");
-        var node = document.getElementsByClassName("list-group")[0];
-        node.innerHTML('<li href="#" class="list-group-item title">My Friends</li>');
         var friendsList = "";
         var myFriends = jQuery.ajax({
             url: baseURL+userID,
@@ -142,7 +140,7 @@
                 // list of json objects
                 // parse it to get a name
                 // fill field with name
-                node.innerHTML += '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
+                friendsList += '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
             },
             error: function(e,t) {
                 console.log("AJAX request failed: " + t + " " + e);
