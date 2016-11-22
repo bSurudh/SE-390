@@ -67,8 +67,8 @@
           var marker = new google.maps.Marker({
             position: feature.position,
             icon: feature.type,
-            map: map
           });
+          marker.setMap(map);
         }
 
 	  	function getAllImages() {
