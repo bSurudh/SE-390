@@ -164,7 +164,7 @@
             type: "GET",
             dataType: "jsonp",
             beforeSend: function(request) {
-                // request.withCredentials = true;
+                request.withCredentials = true;
                 request.setRequestHeader("Authorization", "Bearer: " + userID);
             },
             success: function(data) {
