@@ -98,14 +98,6 @@
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      function addMarker(feature) {
-          var marker = new google.maps.Marker({
-            position: feature.position,
-            icon: feature.type,
-            map: map
-          });
-        }
-
 	  	function getAllImages() {
 	  		// connect to db and get all images uploaded
 	  		console.log("getting all images...");
@@ -127,10 +119,7 @@
 	  					var lng = currentImage["location"]["coordinates"][1];
 	  					var imgPath = currentImage["filePath"];
 
-	  					addMarker({
-	  						position: new google.maps.LatLng(lat,lng),
-	  						type: imgPath
-	  					});
+	  					console.log(map);
 	  				}
 	  			},
 	  			error: function(e) {
