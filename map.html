@@ -23,8 +23,9 @@
     <script src="js/jquery.js"></script>
     <script>
       var map;
+      var initialLocation;
       function initMap() {
-      	var initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
+      	 initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
       	 if (navigator.geolocation) {
       	 	console.log("bababa");
      		navigator.geolocation.getCurrentPosition(function (position) {
