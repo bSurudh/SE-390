@@ -26,19 +26,19 @@
       var initialLocation;
       function initMap() {
       	 initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
-      	 if (navigator.geolocation) {
-      	 	console.log("bababa");
-     		navigator.geolocation.getCurrentPosition(function (position) {
-         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-         	console.log("set: " + initialLocation);
-     		});
- 		}
- 		console.log("initial location: " + initialLocation);
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 16,
           center: initialLocation,
           mapTypeId: 'roadmap'
         });
+
+        if (navigator.geolocation) {
+     		navigator.geolocation.getCurrentPosition(function (position) {
+         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         	console.log("set: " + initialLocation);
+         	map.setCenter(initialLocation);
+     		});
+ 		}
 
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var icons = {
