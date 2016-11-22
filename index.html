@@ -197,8 +197,8 @@
 
       </div>
     </div>
-
     <script>
+    var done = "false";
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -214,7 +214,10 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function(data) {
-                    window.location.href = "https://bsurudh.github.io/map.html";
+                    if(done == "false") {
+                        window.location.href = "https://bsurudh.github.io/map.html";
+                        done = "true";
+                    } 
                 },
                 error: function(data) {
                     console.log("Error when sending Sign-In to server");
