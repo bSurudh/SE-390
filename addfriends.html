@@ -163,8 +163,9 @@
             async: false,
             type: "GET",
             dataType: "JSON",
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("authorization", "Bearer: " + userID);
+            beforeSend: function(request) {
+                request.withCredentials = true;
+                request.setRequestHeader("authorization", "Bearer: " + userID);
             },
             success: function(data) {
                 console.log(JSON.parse(JSON.stringify(data)));
