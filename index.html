@@ -33,7 +33,7 @@
 
     <!-- Google Platform Library - Sign-In -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
+    <meta name="google-signin-client_id" content="342888310577-n3375a4igbhi5cvodrjj73fo7s6fqeoq.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -251,7 +251,7 @@
             <h4 class="modal-title">Sign In</h4>
           </div>
           <div class="modal-body">
-            <p>Add Sign in Options Here</p>
+            <div class="g-signin2" data-onsuccess="onSignIn" data-onfailure="onSignInFailure"></div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -260,6 +260,20 @@
 
       </div>
     </div>
+
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+        }
+
+        function onSignInFailure(error) {
+            console.log(error);
+        }
+    </script>
 
 </body>
 
