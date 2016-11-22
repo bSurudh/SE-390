@@ -87,10 +87,10 @@
         			// 	id: name
         			// });
         		}
-        		console.log("features length: " + features.length);
-        		for (var i = 0, feature; feature = features[i]; i++) {
-          			addMarker(feature);
-        		}
+        		// console.log("features length: " + features.length);
+        		// for (var i = 0, feature; feature = features[i]; i++) {
+          // 			addMarker(feature);
+        		// }
         	},
         	error: function(e) {
         		console.log("AJAX request failed: " + e);
@@ -101,8 +101,7 @@
 			jQuery.ajax({
 				url: url,
 				type: "GET",
-				dataType: "JSON",
-				contentType: "text/plain",
+				contentType: "image/png",
 				success: function(data) {
 					console.log(JSON.parse(JSON.stringify(data)));
 				},
