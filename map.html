@@ -61,8 +61,50 @@
         width: 345px;
       }
     </style>
+      <script>
+      function addMarker(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: feature.type,
+            // map: map
+          });
+        }
+
+	  	function getAllImages() {
+	  		// connect to db and get all images uploaded
+	  		console.log("getting all images...");
+	  		var url = "https://geopix-bengineering.rhcloud.com/allimages";
+	  		var request = jQuery.ajax({
+	  			url: url,
+	  			type: "GET",
+	  			dataType: "JSON",
+	  			contentType: "text/plain",
+	  			success: function(data) {
+	  				console.log(JSON.parse(JSON.stringify(data)));
+	  				// parse json object to get attributes
+
+	  				// for each json object, check if location exists
+	  				// else create a fake location 
+	  				for(var i =0; i < data.length; i++) {
+	  					var currentImage = data[i];
+	  					var lat = currentImage["location"]["coordinates"][0];
+	  					var lng = currentImage["location"]["coordinates"][1];
+	  					var imgPath = currentImage["filePath"];
+
+	  					addMarker({
+	  						position: new google.maps.LatLng(lat,lng),
+	  						type: imgPath
+	  					});
+	  				}
+	  			},
+	  			error: function(e) {
+	  				console.log("Ajax request failed: " + e);
+	  			}
+	  		});
+	  	}
+  </script>
   </head>
-  <body>
+  <body onload="getAllImages()">
 	<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -97,56 +139,19 @@
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-	  	function getAllImages() {
-	  		// connect to db and get all images uploaded
-	  		console.log("getting all images...");
-	  		var url = "https://geopix-bengineering.rhcloud.com/allimages";
-	  		var request = jQuery.ajax({
-	  			url: url,
-	  			type: "GET",
-	  			dataType: "JSON",
-	  			contentType: "text/plain",
-	  			success: function(data) {
-	  				console.log(JSON.parse(JSON.stringify(data)));
-	  				// parse json object to get attributes
-
-	  				// for each json object, check if location exists
-	  				// else create a fake location 
-	  				console.log("map " + map);
-	  				for(var i =0; i < data.length; i++) {
-	  					var currentImage = data[i];
-	  					var lat = currentImage["location"]["coordinates"][0];
-	  					var lng = currentImage["location"]["coordinates"][1];
-	  					var imgPath = currentImage["filePath"];
-	  					var newMarker = new google.maps.Marker({
-	  						position: new google.maps.LatLng(lat, lng),
-	  						icon: imgPath
-	  					});
-	  					newMarker.setMap(map);
-	  				}
-	  			},
-	  			error: function(e) {
-	  				console.log("Ajax request failed: " + e);
-	  			}
-	  		});
-	  	}
-
+      var initialLocation = {lat: -33.8688, lng: 151.2195};
       function initAutocomplete() {
-      	initialLocation = {lat: -33.8688, lng: 151.2195};
       	 if (navigator.geolocation) {
      		navigator.geolocation.getCurrentPosition(function (position) {
          	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
          	map.setCenter(initialLocation);
      		});
-     		getAllImages();
  		}
         var map = new google.maps.Map(document.getElementById('map'), {
           center: initialLocation,
           zoom: 13,
           mapTypeId: 'roadmap'
         });
-        console.log("MAP " + map);
 
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
