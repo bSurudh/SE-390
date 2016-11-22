@@ -64,12 +64,12 @@
       <script>
   	function getAllImages() {
   		// connect to db and get all images uploaded
+  		console.log("getting all images...");
   		var url = "http://geopix-bengineering.rhcloud.com/allimages";
   		jQuery(document).get(url, function(data, status){
   			console.log("Response received! " + status);
   			console.log(JSON.parse(JSON.stringify(data)));
   		});
-
   	}
   </script>
   </head>
