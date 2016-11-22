@@ -133,9 +133,12 @@
         var friendsList = "";
         console.log(baseURL+userID);
         var myFriends = jQuery.ajax({
-            url: baseURL+userID,
+            url: baseURL,
             type: "GET",
             dataType: "JSON",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer: " + userID);
+            },
             success: function(data) {
                 console.log(JSON.parse(JSON.stringify(data)));
                 // list of json objects
