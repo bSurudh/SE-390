@@ -26,6 +26,7 @@
       function initMap() {
       	var initialLocation = new google.maps.LatLng(-33.91722, 151.23064);
       	 if (navigator.geolocation) {
+      	 	console.log("bababa");
      		navigator.geolocation.getCurrentPosition(function (position) {
          	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
      		});
