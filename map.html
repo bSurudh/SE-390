@@ -63,8 +63,31 @@
     </style>
   </head>
   <body>
-  	<div class="header">Header - place other functionality here</div>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+	<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="#">GeoPix</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">Add Friend</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Adventure">
     <div id="map"></div>
     <script>
       // This example adds a search box to a map, using the Google Place Autocomplete
@@ -76,8 +99,15 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
       function initAutocomplete() {
+      	initialLocation = {lat: -33.8688, lng: 151.2195};
+      	 if (navigator.geolocation) {
+     		navigator.geolocation.getCurrentPosition(function (position) {
+         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         	map.setCenter(initialLocation);
+     		});
+ 		}
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
+          center: initialLocation,
           zoom: 13,
           mapTypeId: 'roadmap'
         });
