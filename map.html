@@ -69,9 +69,10 @@
         		console.log(JSON.parse(JSON.stringify(data)));
         		// work with json data to create features
         		for(var i = 0; i < data.length; i++) {
-        			var lat = data["location"]["coordinates"][0];
-        			var lng = data["location"]["coordinates"][1];
-        			var imgPath = data["filePath"];
+        			var currImage = data[i];
+        			var lat = currImage["location"]["coordinates"][0];
+        			var lng = currImage["location"]["coordinates"][1];
+        			var imgPath = currImage["filePath"];
         			features.push({
         				position: new google.maps.LatLng(lat, lng),
         				type: imgPath
