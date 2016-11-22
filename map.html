@@ -80,16 +80,21 @@
         			var imgPath = currImage["filePath"];
         			var name = currImage["_id"];
         			// get the filepath of the image
+        			console.log(baseURL+name);
         			var nestedQuery = jQuery.ajax({
         				url: baseURL+name,
         				type: "GET",
         				dataType: "JSON",
         				contentType: "text/plain",
         				success: function(data) {
+        					console.log("logging data...");
         					console.log(JSON.parse(JSON.stringify(data)));
         					// features.push({
         					// 	position: new google.maps.LatLng(lat, lng),
         					// });
+        				},
+        				error: function(e) {
+        					console.log("AJAX request failed: " + e);
         				}
         			});
 
