@@ -50,6 +50,22 @@
         .header {
             /*padding-top: 40px;*/
         }
+
+        /*SEARCH BAR CSS START*/
+
+        .searchBar {
+            width: 130px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        /* When the input field gets focus, change its width to 100% */
+        .searchBar:focus {
+            width: 100%;
+        }
+        /*SEARCH BAR CSS END*/
+
+
         </style>
 
         <!--<script type="text/javascript">
@@ -110,12 +126,9 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <div class="container bootstrap snippet">
 
-  <div class="header">
-    <h3 class="text-muted prj-name">
-        <span class="fa fa-users fa-2x principal-title"></span>
-        Friend zone
-    </h3>
-  </div>
+<!-- ADD FRIENDS FEATURE HERE -->
+<input id="searchBar" type="text" name="search" placeholder="Search..">
+
 
   <script>
       function getCookie(cname) {
