@@ -177,7 +177,7 @@
                     // for now just log the name to see if it works
                     console.log(JSON.parse(JSON.stringify(data)));
                     console.log("data[name] = " + data["name"]);
-                    
+
                 },
                 error: function(e,t) {
                     console.log("AJAX friends request failed: " + t + " " + e);
@@ -211,7 +211,9 @@
                 friendsList += '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
                 for(var i = 0; i < data.length; i++) {
                     var currFriendID = data[i];
-                    getFriendName(currFriendID);
+                    console.log(JSON.parse(JSON.stringify(data[i])));
+                    // getFriendName(currFriendID);
+
                     // so this gets the name of every friend, and when the friend is loaded,
                     // the friend's name is added to the table
                     // console.log("FRIEND NAME: " + name);
