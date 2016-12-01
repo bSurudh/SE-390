@@ -114,8 +114,41 @@
     </h3>
   </div>
   <input type="text" name="search" placeholder="Search..">
+  <input type='submit' onclick="addFriend();" />
 
   <script>
+
+      function addFriend() {
+        var friendName = document.getElementById('search').value;
+        var baseURL = "https://geopix-bengineering.rhcloud.com/friends/";
+        var userID = getCookie("id_token");
+        jQuery.ajax({
+            url: baseURL+friendName,
+            asnyc: false,
+            type: "POST",
+            dataType: "json",
+            contentType: "text/plain",
+            beforeSend: function(request) {
+                // request.withCredentials = true;
+                var value = "Bearer: " + userID;
+                request.setRequestHeader("Authorization", value);
+                console.log("request headers set.");
+            },
+            success: function(data) {
+                // console.log(JSON.parse(JSON.stringify(data)));
+                // // list of json objects
+                // // parse it to get a name
+                // // fill field with nam
+                console.log("successfully posted data");
+            },
+            error: function(e,t) {
+                console.log("AJAX friends request failed: " + t + " " + e);
+            }
+
+        });
+      }
+
+
       function getCookie(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');
@@ -175,7 +208,7 @@
                 // parse it to get a name
                 // fill field with name
                 friendsList += '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
-                for(var i = 1; i < data.length; i++) {
+                for(var i = 0; i < data.length; i++) {
                     var currFriendID = data[i];
                     var name = getFriendName(currFriendID);
                     console.log("FRIEND NAME: " + name);
