@@ -19,12 +19,12 @@
         </script>-->
         <style>
             .header-table-cell {
-                text-align:center;
+                text-align:center !important;
             }
 
             .table-cell {
-                text-align:center;
-                vertical-align:middle;
+                text-align:center !important;
+                vertical-align:middle !important;
             }
         </style>
     </head>
@@ -65,7 +65,7 @@
     <div class="container">
       <h2>.</h2>
       <h2>My Pictures</h2>
-      <table class="table table-hover" id="picturesTable">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th class="table-header-cell">Picture</th>
@@ -74,15 +74,7 @@
             <th class="table-header-cell"></th>
           </tr>
         </thead>
-        <tbody>
-            <!--<tr>
-              <td   style="vertical-align: middle;">
-                <img src='http://vignette2.wikia.nocookie.net/pokemon/images/b/b1/025Pikachu_XY_anime_3.png' style="width: 150px; height: 200px">
-              </td>
-              <td style="vertical-align: middle;">June 4, 2016</td>
-              <td style="vertical-align: middle;">3.8</td>
-              <td style="vertical-align: middle;"><button type="button" class="btn btn-primary">Delete</button></td>
-            </tr>!-->
+        <tbody id="picturesTableBody">
         </tbody>
     </div>
 
@@ -106,7 +98,7 @@
       var imagesURL = "https://geopix-bengineering.rhcloud.com/images/user";
       var userID = getCookie("id_token");
       var photos = "";
-      var picturesTable = document.getElementById("picturesTable");
+      var picturesTableBody = document.getElementById("picturesTableBody");
       jQuery.ajax({
             url: imagesURL,
             type: "GET",
@@ -117,7 +109,6 @@
             success: function(data) {
                 console.log(JSON.parse(JSON.stringify(data)));
                 var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
-                // work with json data to create features
                 for(var i = 0; i < data.length; i++) {
                     var curImage = data[i];
                     if(!curImage.hasOwnProperty("rating") || !curImage.hasOwnProperty("_id") || !curImage.hasOwnProperty("timestamp")) {
@@ -127,7 +118,7 @@
                     var imageId = curImage["_id"];
                     var imageDate = new Date(curImage["timestamp"]);
                     var dateDisplayStr = imageDate.toDateString() + " " + imageDate.toLocaleTimeString();
-                    var newRow = picturesTable.insertRow(1);
+                    var newRow = picturesTableBody.insertRow(0);
                     var pictureCell = newRow.insertCell(0);
                     var timestampCell = newRow.insertCell(1);
                     var ratingCell = newRow.insertCell(2);
