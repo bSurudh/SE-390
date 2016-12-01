@@ -57,9 +57,9 @@
                     if(!curImage.hasOwnProperty("rating") || !curImage.hasOwnProperty("_id") || !curImage.hasOwnProperty("timestamp")) {
                         continue;
                     }
-                    var imageRating = currImage["rating"];
-                    var imageId = currImage["_id"];
-                    var imageDate = new Date(currImage["timestamp"]);
+                    var imageRating = curImage["rating"];
+                    var imageId = curImage["_id"];
+                    var imageDate = new Date(curImage["timestamp"]);
                     var dateDisplayStr = imageDate.toDateString() + " " + imageDate.toLocaleTimeString();
                     var newRow = picturesTable.insertRow(0);
                     var pictureCell = newRow.insertCell(0);
