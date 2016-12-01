@@ -131,7 +131,7 @@
                     deleteButton.type = "button";
                     deleteButton.innerHTML = "Delete";
                     console.log("Creating event listener for image number: " + i + " out of " + data.length + " images. With id: " + imageId);
-                    deleteButton.addEventListener("click", (function(innerImageId) { function() {
+                    deleteButton.addEventListener("click", (function(innerImageId) { return function() {
                         console.log("Deleting image with id: " + innerImageId);
                         makeDeleteRequest(innerImageId);
                     } })(imageId), false);
