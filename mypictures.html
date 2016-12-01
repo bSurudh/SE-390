@@ -150,19 +150,19 @@
         });
 
         function makeDeleteRequest(imageId) {
+            console.log("Deleting picture: " + imageId);
             var userID = getCookie("id_token");
             jQuery.ajax({
                 url: "https://geopix-bengineering.rhcloud.com/images/" + imageId,
                 type: "DELETE",
-                dataType: "JSON",
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("authorization", "Bearer: " + userID);
                 },
                 success: function(data) {
                     location.reload(true);
                 },
-                error: function(e,t) {
-                    console.log("AJAX delete picture request failed: " + t + " " + e);
+                error: function(e,t, m) {
+                    console.log("AJAX delete picture request failed: " + t + " " + e + " " + m);
                 }
             });
         }
