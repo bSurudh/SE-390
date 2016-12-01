@@ -20,65 +20,6 @@
     </head>
 
     <body>
-    <script src="js/jquery.js"></script>
-    <script>
-      function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length,c.length);
-            }
-        }
-        return "";
-      }
-      
-      var imagesURL = "https://geopix-bengineering.rhcloud.com/images/user";
-      var userID = getCookie("id_token");
-      var photos = "";
-      var picturesTable = document.getElementById("picturesTable")
-      jQuery.ajax({
-            url: imagesURL,
-            type: "GET",
-            dataType: "JSON",
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("authorization", "Bearer: " + userID);
-            },
-            success: function(data) {
-                console.log(JSON.parse(JSON.stringify(data)));
-                var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
-                // work with json data to create features
-                for(var i = 0; i < data.length; i++) {
-                    var curImage = data[i];
-                    if(!curImage.hasOwnProperty("rating") || !curImage.hasOwnProperty("_id") || !curImage.hasOwnProperty("timestamp")) {
-                        continue;
-                    }
-                    var imageRating = curImage["rating"];
-                    var imageId = curImage["_id"];
-                    var imageDate = new Date(curImage["timestamp"]);
-                    var dateDisplayStr = imageDate.toDateString() + " " + imageDate.toLocaleTimeString();
-                    var newRow = picturesTable.insertRow(0);
-                    var pictureCell = newRow.insertCell(0);
-                    var timestampCell = newRow.insertCell(1);
-                    var ratingCell = newRow.insertCell(2);
-                    var buttonCell = newRow.insertCell(3);
-                    var pictureImage = new Image(150, 200);
-                    pictureImage.src = baseURL + imageId;
-                    pictureCell.innerHTML = pictureImage;
-                    timestampCell.innerHTML = dateDisplayStr;
-                    ratingCell.innerHTML = imageRating;
-                    buttonCell.innerHTML = '<button type="button" class="btn btn-primary">Delete</button>';
-                }
-            },
-            error: function(e,t) {
-                console.log("AJAX friends request failed: " + t + " " + e);
-            }
-        });
-    </script>
         <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
@@ -134,6 +75,66 @@
             </tr>
         </tbody>
     </div>
+    
+    <script src="js/jquery.js"></script>
+    <script>
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length,c.length);
+            }
+        }
+        return "";
+      }
+      
+      var imagesURL = "https://geopix-bengineering.rhcloud.com/images/user";
+      var userID = getCookie("id_token");
+      var photos = "";
+      var picturesTable = document.getElementById("picturesTable");
+      jQuery.ajax({
+            url: imagesURL,
+            type: "GET",
+            dataType: "JSON",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("authorization", "Bearer: " + userID);
+            },
+            success: function(data) {
+                console.log(JSON.parse(JSON.stringify(data)));
+                var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
+                // work with json data to create features
+                for(var i = 0; i < data.length; i++) {
+                    var curImage = data[i];
+                    if(!curImage.hasOwnProperty("rating") || !curImage.hasOwnProperty("_id") || !curImage.hasOwnProperty("timestamp")) {
+                        continue;
+                    }
+                    var imageRating = curImage["rating"];
+                    var imageId = curImage["_id"];
+                    var imageDate = new Date(curImage["timestamp"]);
+                    var dateDisplayStr = imageDate.toDateString() + " " + imageDate.toLocaleTimeString();
+                    var newRow = picturesTable.insertRow(1);
+                    var pictureCell = newRow.insertCell(0);
+                    var timestampCell = newRow.insertCell(1);
+                    var ratingCell = newRow.insertCell(2);
+                    var buttonCell = newRow.insertCell(3);
+                    var pictureImage = new Image(150, 200);
+                    pictureImage.src = baseURL + imageId;
+                    pictureCell.innerHTML = pictureImage;
+                    timestampCell.innerHTML = dateDisplayStr;
+                    ratingCell.innerHTML = imageRating;
+                    buttonCell.innerHTML = '<button type="button" class="btn btn-primary">Delete</button>';
+                }
+            },
+            error: function(e,t) {
+                console.log("AJAX friends request failed: " + t + " " + e);
+            }
+        });
+    </script>
     </body>
 </html>
 >
