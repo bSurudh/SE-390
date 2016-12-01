@@ -167,6 +167,7 @@
                 // request.withCredentials = true;
                 var value = "Bearer: " + userID;
                 request.setRequestHeader("Authorization", value);
+                console.log("request headers set.");
             },
             success: function(data) {
                 console.log(JSON.parse(JSON.stringify(data)));
