@@ -131,10 +131,10 @@
                     deleteButton.type = "button";
                     deleteButton.innerHTML = "Delete";
                     console.log("Creating event listener for image number: " + i + " out of " + data.length + " images. With id: " + imageId);
-                    deleteButton.addEventListener("click", function() {
-                        console.log("Deleting image number: " + i + " out of " + data.length + " images. With id: " + imageId);
-                        makeDeleteRequest(imageId);
-                    }, false);
+                    deleteButton.addEventListener("click", (function(innerImageId) { function() {
+                        console.log("Deleting image with id: " + innerImageId);
+                        makeDeleteRequest(innerImageId);
+                    } })(imageId), false);
 
                     pictureCell.appendChild(pictureImage);
                     pictureCell.className = "table-cell";
