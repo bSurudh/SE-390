@@ -65,17 +65,17 @@
           </tr>
         </thead>
         <tbody>
-            <tr>
+            <!--<tr>
               <td style="vertical-align: middle;">
                 <img src='http://vignette2.wikia.nocookie.net/pokemon/images/b/b1/025Pikachu_XY_anime_3.png' style="width: 150px; height: 200px">
               </td>
               <td style="vertical-align: middle;">June 4, 2016</td>
               <td style="vertical-align: middle;">3.8</td>
               <td style="vertical-align: middle;"><button type="button" class="btn btn-primary">Delete</button></td>
-            </tr>
+            </tr>!-->
         </tbody>
     </div>
-    
+
     <script src="js/jquery.js"></script>
     <script>
       function getCookie(cname) {
@@ -124,7 +124,7 @@
                     var buttonCell = newRow.insertCell(3);
                     var pictureImage = new Image(150, 200);
                     pictureImage.src = baseURL + imageId;
-                    pictureCell.innerHTML = pictureImage;
+                    pictureCell.appendChild(pictureImage);
                     timestampCell.innerHTML = dateDisplayStr;
                     ratingCell.innerHTML = imageRating;
                     buttonCell.innerHTML = '<button type="button" class="btn btn-primary">Delete</button>';
