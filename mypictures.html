@@ -123,15 +123,24 @@
                     var timestampCell = newRow.insertCell(1);
                     var ratingCell = newRow.insertCell(2);
                     var buttonCell = newRow.insertCell(3);
+                    
                     var pictureImage = new Image(150, 200);
                     pictureImage.src = baseURL + imageId;
+                    var deleteButton = document.createElement("BUTTON");
+                    deleteButton.className = "btn btn-primary";
+                    deleteButton.type = "button";
+                    deleteButton.innerHTML = "Delete";
+                    deleteButton.addEventListener("click", function() {
+                        makeDeleteRequest(imageId);
+                    }, false);
+
                     pictureCell.appendChild(pictureImage);
                     pictureCell.className = "table-cell";
                     timestampCell.innerHTML = dateDisplayStr;
                     timestampCell.className = "table-cell";
                     ratingCell.innerHTML = imageRating;
                     ratingCell.className = "table-cell";
-                    buttonCell.innerHTML = '<button type="button" class="btn btn-primary">Delete</button>';
+                    buttonCell.appendChild(deleteButton);
                     buttonCell.className = "table-cell";
                 }
             },
@@ -139,6 +148,24 @@
                 console.log("AJAX friends request failed: " + t + " " + e);
             }
         });
+
+        function makeDeleteRequest(imageId) {
+            var userID = getCookie("id_token");
+            jQuery.ajax({
+                url: "https://geopix-bengineering.rhcloud.com/images/" + imageId,
+                type: "DELETE",
+                dataType: "JSON",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("authorization", "Bearer: " + userID);
+                },
+                success: function(data) {
+                    location.reload(true);
+                },
+                error: function(e,t) {
+                    console.log("AJAX delete picture request failed: " + t + " " + e);
+                }
+            });
+        }
     </script>
     </body>
 </html>
