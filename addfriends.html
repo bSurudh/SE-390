@@ -132,7 +132,7 @@
     }
 
         function getFriendName(friendID) {
-            var baseURL = "https://geopix-bengineering.rhcloud.com/users";
+            var baseURL = "https://geopix-bengineering.rhcloud.com/users/";
             var realURL = baseURL+friendID;
             jQuery.ajax({
                 url: realURL,
@@ -165,7 +165,8 @@
             dataType: "jsonp",
             beforeSend: function(request) {
                 // request.withCredentials = true;
-                request.setRequestHeader("Authorization", "Bearer: " + userID);
+                var value = "Bearer: " + userID;
+                request.setRequestHeader("Authorization", value);
             },
             success: function(data) {
                 console.log(JSON.parse(JSON.stringify(data)));
