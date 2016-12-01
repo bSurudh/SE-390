@@ -37,11 +37,12 @@
         return "";
       }
       
-      var baseURL = "https://geopix-bengineering.rhcloud.com/images/user";
+      var imagesURL = "https://geopix-bengineering.rhcloud.com/images/user";
       var userID = getCookie("id_token");
       var photos = "";
+      var picturesTable = document.getElementById("picturesTable")
       jQuery.ajax({
-            url: baseURL,
+            url: imagesURL,
             type: "GET",
             dataType: "JSON",
             beforeSend: function(xhr) {
@@ -49,6 +50,29 @@
             },
             success: function(data) {
                 console.log(JSON.parse(JSON.stringify(data)));
+                var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
+                // work with json data to create features
+                for(var i = 0; i < data.length; i++) {
+                    var curImage = data[i];
+                    if(!curImage.hasOwnProperty("rating") || !curImage.hasOwnProperty("_id") || !curImage.hasOwnProperty("timestamp")) {
+                        continue;
+                    }
+                    var imageRating = currImage["rating"];
+                    var imageId = currImage["_id"];
+                    var imageDate = new Date(currImage["timestamp"]);
+                    var dateDisplayStr = imageDate.toDateString() + " " + imageDate.toLocaleTimeString();
+                    var newRow = picturesTable.insertRow(0);
+                    var pictureCell = newRow.insertCell(0);
+                    var timestampCell = newRow.insertCell(1);
+                    var ratingCell = newRow.insertCell(2);
+                    var buttonCell = newRow.insertCell(3);
+                    var pictureImage = new Image(150, 200);
+                    pictureImage.src = baseURL + imageId;
+                    pictureCell.innerHTML = pictureImage;
+                    timestampCell.innerHTML = dateDisplayStr;
+                    ratingCell.innerHTML = imageRating;
+                    buttonCell.innerHTML = '<button type="button" class="btn btn-primary">Delete</button>';
+                }
             },
             error: function(e,t) {
                 console.log("AJAX friends request failed: " + t + " " + e);
@@ -90,7 +114,7 @@
     <div class="container">
       <h2>.</h2>    
       <h2>My Pictures</h2>
-      <table class="table table-hover">
+      <table class="table table-hover" id="picturesTable">
         <thead>
           <tr>
             <th>Picture</th>
