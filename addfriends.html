@@ -103,20 +103,6 @@
         <!-- /.container -->
     </nav>
         <script src="js/jquery.js"></script>
-        <script>
-            var allUsers = jQuery.ajax({
-                url: "https://geopix-bengineering.rhcloud.com/images/all",
-                type: "GET",
-                dataType: "JSON",
-                contentType: "text/plain",
-                success: function(data) {
-                    console.log(JSON.parse(JSON.stringify(data)));
-                },
-                error: function(e,t) {
-                    console.log("AJAX allusers request failed: " + t + " " + e);
-                }
-            });
-        </script>
 <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <div class="container bootstrap snippet">
@@ -146,7 +132,7 @@
     }
 
         function getFriendName(friendID) {
-            var baseURL = "https://geopix-bengineering.rhcloud.com/users/";
+            var baseURL = "https://geopix-bengineering.rhcloud.com/users";
             var realURL = baseURL+friendID;
             jQuery.ajax({
                 url: realURL,
@@ -165,11 +151,13 @@
             });
         } 
 
-        var baseURL = "https://geopix-bengineering.rhcloud.com/friends/";
+        var baseURL = "https://geopix-bengineering.rhcloud.com/friends";
         var userID = getCookie("id_token");
         console.log("userID: " + userID);
         var friendsList = "";
         console.log(baseURL+userID);
+
+
         var myFriends = jQuery.ajax({
             url: baseURL,
             async: false,
