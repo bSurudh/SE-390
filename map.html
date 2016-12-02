@@ -272,6 +272,8 @@
       var map;
       var initialLocation;
       var features = [];
+      var markers = [];
+      var markerCounter = 0;
 
       function addMarker(feature) {
         var marker = new google.maps.Marker({
@@ -280,13 +282,21 @@
           icon: feature.icon,
           map: map
         });
+        markers[markerCounter++] = marker;
         marker.addListener('click', function() {
           modal.style.display = "block";
           modalImg.src = feature.icon.url;
           console.log(JSON.parse(JSON.stringify(rating)));
         });
       }
-      
+
+      function removeAllMarkers() {
+        for(var i = 0; i < markerCounter; i++) {
+          markers[i].setMap(null);
+        }
+        markerCounter = 0;
+      }
+
       function initMap() {
 		initialLocation = new google.maps.LatLng(43.4731225, -80.5436897);
         if (navigator.geolocation) {
@@ -396,6 +406,7 @@
           success: function(data) {
             console.log(JSON.parse(JSON.stringify(data)));
             // work with json data to create features
+            removeAllMarkers();
             for(var i = 0; i < data.length; i++) {
               var currImage = data[i];
               var lat = currImage["location"]["coordinates"][0];
