@@ -271,6 +271,7 @@
     <script>
       var map;
       var initialLocation;
+      var features = [];
       function initMap() {
 		initialLocation = new google.maps.LatLng(43.4731225, -80.5436897);
         if (navigator.geolocation) {
@@ -370,12 +371,11 @@
       }
 
         // initialize features using jquery
-        var features = [];
         addAllPictures();
         // end of init map
       }
-      var features = [];
 
+      
       // Function that filters the images based on who they were uploaded by.
       function filterByFriend() {
         var userID = getCookie("id_token");
