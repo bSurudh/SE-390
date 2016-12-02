@@ -21,16 +21,6 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <!-- Google Platform Library - Sign-In -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="342888310577-n3375a4igbhi5cvodrjj73fo7s6fqeoq.apps.googleusercontent.com">
@@ -173,7 +163,7 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
+    <script src="index.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
@@ -197,39 +187,6 @@
 
       </div>
     </div>
-    <script>
-    var done = "false";
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail());
-            console.log('IDToken: ' + googleUser.getAuthResponse().id_token);
-            document.cookie = 'id_token=' + googleUser.getAuthResponse().id_token+';';
-            var request = jQuery.ajax({
-                url: "https://geopix-bengineering.rhcloud.com/users",
-                type: "POST",
-                data: '{"name":"'+profile.getName()+'","email":"'+profile.getEmail()+'", "token": "' + googleUser.getAuthResponse().id_token + '"}',
-                dataType: "json",
-                contentType: "application/json",
-                success: function(data) {
-                    if(done == "false") {
-                        window.location.href = "https://bsurudh.github.io/map.html";
-                        done = "true";
-                    } 
-                },
-                error: function(data) {
-                    console.log("Error when sending Sign-In to server");
-                }
-            });
-        }
-
-        function onSignInFailure(error) {
-            console.log(error);
-        }
-    </script>
-
 </body>
 
 </html>

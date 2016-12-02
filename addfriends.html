@@ -11,63 +11,7 @@
 	    <!-- Custom Fonts -->
 	    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-        <style>
-        .list-content{
-         min-height:300px;
-        }
-
-        .list-content .list-group .title{
-          background:#5bc0de;
-          border:2px solid #DDDDDD;
-          font-weight:bold;
-          color:#FFFFFF;
-        }
-        
-        .list-group-item img {
-            height:80px; 
-            width:80px;
-        }
-
-        .jumbotron .btn {
-            padding: 5px 5px !important;
-            font-size: 12px !important;
-        }
-
-        .prj-name {
-            color:#5bc0de;    
-        }
-
-        .break{
-            width:100%;
-            margin:20px;
-        }
-
-        .name {
-            color:#5bc0de;    
-        }
-
-        .header {
-            padding-top: 40px;
-        }
-
-        .input[type=text] {
-            width: 130px;
-            -webkit-transition: width 0.4s ease-in-out;
-            transition: width 0.4s ease-in-out;
-        }
-
-    /* When the input field gets focus, change its width to 100% */
-        input[type=text]:focus {
-            width: 100%;
-        }
-        </style>
-
-        <!--<script type="text/javascript">
-            if(document.cookie.indexOf('id_token') == -1) {
-                window.location = "https://bsurudh.github.io";
-            }
-        </script>-->
+        <link href="addfriends.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -103,6 +47,8 @@
         <!-- /.container -->
     </nav>
         <script src="js/jquery.js"></script>
+        <Script src="addfriends.js"></script>
+
 <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <div class="container bootstrap snippet">
@@ -115,11 +61,6 @@
   </div>
   <input type="text" name="search" id="search" placeholder="Search..">
   <input type='submit' onclick="addFriend();" />
-  <!-- <div class="alert alert-success" id="success-alert" style="visibility:hidden">
-    <button type="button" class="close" data-dismiss="alert">x</button>
-    <strong>Success! </strong>
-    Successfully added friend!
-</div> -->
 
       <div height="50px"></div>
 
@@ -132,121 +73,6 @@
       </li>
     </ul>
   </div>
-  <script>
-      function addFriend() {
-        var friendName = document.getElementById('search').value;
-        var baseURL = "https://geopix-bengineering.rhcloud.com/friends/";
-        var userID = getCookie("id_token");
-        jQuery.ajax({
-            url: baseURL+friendName,
-            asnyc: false,
-            type: "POST",
-            dataType: "json",
-            contentType: "text/plain",
-            beforeSend: function(request) {
-                // request.withCredentials = true;
-                var value = "Bearer: " + userID;
-                request.setRequestHeader("Authorization", value);
-                console.log("request headers set.");
-            },
-            success: function(data) {
-                console.log("successfully posted data");
-                // var successBox = document.getElementById("success-alert");
-                // successBox.show();
-                // successBox.alert();
-                // successBox.fadeTo(2000,500).slideUp(500, function(){
-                //     successBox.slideUp(500);
-                // });
-                location.reload();
-            },
-            error: function(e,t) {
-                console.log("AJAX friends request failed: " + t + " " + e);
-            }
-
-        });
-      }
-
-
-      function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length,c.length);
-            }
-        }
-        return "";
-    }
-
-        function generateFriendHTML(friendName) {
-            var friendEntry = '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
-            friendEntry += friendName + '<br>';
-            friendEntry += '</label><div class="break"></div></li>';
-            jQuery("#friend-list").append(friendEntry);
-        }
-
-        function getFriendName(friendID) {
-            var baseURL = "https://geopix-bengineering.rhcloud.com/users/";
-            var realURL = baseURL+friendID;
-            jQuery.ajax({
-                url: realURL,
-                async: false,
-                type: "GET",
-                dataType: "JSON",
-                contentType: "text/plain",
-                success: function(data) {
-                    // for now just log the name to see if it works
-                    // console.log(JSON.parse(JSON.stringify(data)));
-                    console.log("data[name] = " + data["name"]);
-                    generateFriendHTML(data["name"]);
-                },
-                error: function(e,t) {
-                    console.log("AJAX friends request failed: " + t + " " + e);
-                }
-            });
-        } 
-
-        var baseURL = "https://geopix-bengineering.rhcloud.com/friends";
-        var userID = getCookie("id_token");
-        console.log("userID: " + userID);
-        var friendsList = "";
-        console.log(baseURL+userID);
-
-
-        var myFriends = jQuery.ajax({
-            url: baseURL,
-            async: false,
-            type: "GET",
-            dataType: "json",
-            beforeSend: function(request) {
-                // request.withCredentials = true;
-                var value = "Bearer: " + userID;
-                request.setRequestHeader("Authorization", value);
-                console.log("request headers set.");
-            },
-            success: function(data) {
-                console.log(JSON.parse(JSON.stringify(data)));
-                // list of json objects
-                // parse it to get a name
-                // fill field with name
-                for(var i = 0; i < data.length; i++) {
-                    var currFriendID = data[i]["uidTwo"];
-                    console.log(JSON.parse(JSON.stringify(currFriendID)));
-                    getFriendName(currFriendID);
-                    // so this gets the name of every friend, and when the friend is loaded,
-                    // the friend's name is added to the table
-                    // console.log("FRIEND NAME: " + name);
-                }   
-            },
-            error: function(e,t) {
-                console.log("AJAX friends request failed: " + t + " " + e);
-            }
-        });
-      </script>
   </div>
 </div>                                                                                
 	</body>
