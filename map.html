@@ -325,6 +325,7 @@
 		}
 
       function addAllPictures() {
+        var userID = getCookie("id_token");
         var request = jQuery.ajax({
           url: "https://geopix-bengineering.rhcloud.com/images/all",
           type: "GET",
@@ -384,6 +385,12 @@
           type: "GET",
           dataType: "JSON",
           contentType: "text/plain",
+          beforeSend: function(request) {
+            // request.withCredentials = true;
+            var value = "Bearer: " + userID;
+            request.setRequestHeader("Authorization", value);
+            console.log("request headers set.");
+          },
           success: function(data) {
             console.log(JSON.parse(JSON.stringify(data)));
             // work with json data to create features
