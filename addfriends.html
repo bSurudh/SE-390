@@ -115,6 +115,11 @@
   </div>
   <input type="text" name="search" id="search" placeholder="Search..">
   <input type='submit' onclick="addFriend();" />
+  <div class="alert alert-success" id="success-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Success! </strong>
+    Successfully added friend!
+</div>
 
   <script>
 
@@ -140,6 +145,11 @@
                 // // parse it to get a name
                 // // fill field with nam
                 console.log("successfully posted data");
+                var successBox = document.getElementById("success-alert");
+                successBox.alert();
+                successBox.fadeTo(2000,500).slideUp(500, function(){
+                    successBox.slideUp(500);
+                });
             },
             error: function(e,t) {
                 console.log("AJAX friends request failed: " + t + " " + e);
