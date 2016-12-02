@@ -309,6 +309,10 @@
     var modalImg = document.getElementById("img01");
     var rating = document.getElementById("caption");
 
+    jQuery("input:radio").click(function() {
+      console.log("BUTTON clicked:" + this.id);
+    });
+
     function addMarker(feature) {
         var marker = new google.maps.Marker({
           position: feature.position,
