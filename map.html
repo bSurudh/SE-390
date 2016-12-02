@@ -321,8 +321,9 @@
         marker.addListener('click', function() {
           modal.style.display = "block";
           modalImg.src = feature.icon.url;
-          var ratingString = "star"+this.rating;
+          var ratingString = "#star"+this.rating;
           console.log(ratingString);
+          jQuery(ratingString).attr('checked', 'checked');
         });
     }
 
