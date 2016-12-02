@@ -240,6 +240,7 @@
 
     <input id="pac-input" class="controls" type="text" placeholder="Filter by Friends...">
     <input type='submit' onclick="filterByFriend();" />
+    <input type='reset' onclick="resetMap();" />
     <div id="map"></div>
 
     <div id="myModal" class="modal">
@@ -323,48 +324,96 @@
 		  modal.style.display = "none";
 		}
 
+      function addAllPictures() {
+        var request = jQuery.ajax({
+          url: "https://geopix-bengineering.rhcloud.com/images/all",
+          type: "GET",
+          dataType: "JSON",
+          contentType: "text/plain",
+          success: function(data) {
+            console.log(JSON.parse(JSON.stringify(data)));
+            var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
+            // work with json data to create features
+            for(var i = 0; i < data.length; i++) {
+              var currImage = data[i];
+              var lat = currImage["location"]["coordinates"][0];
+              console.log(lat);
+              var lng = currImage["location"]["coordinates"][1];
+              var imgPath = currImage["filePath"];
+                    var rating = currImage["rating"];
+              var name = currImage["_id"];
+              // get the filepath of the image
+              console.log(baseURL+name);
+              // nestedAjaxCall(baseURL+name);
+              features.push({
+                position: new google.maps.LatLng(lat, lng),
+                icon: {
+                  url: baseURL+name,
+                  scaledSize: new google.maps.Size(30,30),
+                  origin: new google.maps.Point(0,0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+                },
+                stars: rating,
+                id: name
+              });
+            }
+            console.log("features length: " + features.length);
+            for (var i = 0, feature; feature = features[i]; i++) {
+                addMarker(feature);
+            }
+          },
+          error: function(e) {
+            console.log("AJAX request failed: " + e);
+          }
+        });
+
+      }
+
         // initialize features using jquery
         var features = [];
-        var request = jQuery.ajax({
-        	url: "https://geopix-bengineering.rhcloud.com/images/all",
-        	type: "GET",
-        	dataType: "JSON",
-        	contentType: "text/plain",
-        	success: function(data) {
-        		console.log(JSON.parse(JSON.stringify(data)));
-        		var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
-        		// work with json data to create features
-        		for(var i = 0; i < data.length; i++) {
-        			var currImage = data[i];
-        			var lat = currImage["location"]["coordinates"][0];
-        			console.log(lat);
-        			var lng = currImage["location"]["coordinates"][1];
-        			var imgPath = currImage["filePath"];
-                    var rating = currImage["rating"];
-        			var name = currImage["_id"];
-        			// get the filepath of the image
-        			console.log(baseURL+name);
-        			// nestedAjaxCall(baseURL+name);
-        			features.push({
-        				position: new google.maps.LatLng(lat, lng),
-        				icon: {
-        					url: baseURL+name,
-        					scaledSize: new google.maps.Size(30,30),
-        					origin: new google.maps.Point(0,0), // origin
-    						anchor: new google.maps.Point(0, 0) // anchor
-        				},
-                        stars: rating
-        			});
-        		}
-        		console.log("features length: " + features.length);
-        		for (var i = 0, feature; feature = features[i]; i++) {
-          			addMarker(feature);
-        		}
-        	},
-        	error: function(e) {
-        		console.log("AJAX request failed: " + e);
-        	}
-        });
+        addAllPictures();
+
+        // var request = jQuery.ajax({
+        // 	url: "https://geopix-bengineering.rhcloud.com/images/all",
+        // 	type: "GET",
+        // 	dataType: "JSON",
+        // 	contentType: "text/plain",
+        // 	success: function(data) {
+        // 		console.log(JSON.parse(JSON.stringify(data)));
+        // 		var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
+        // 		// work with json data to create features
+        // 		for(var i = 0; i < data.length; i++) {
+        // 			var currImage = data[i];
+        // 			var lat = currImage["location"]["coordinates"][0];
+        // 			console.log(lat);
+        // 			var lng = currImage["location"]["coordinates"][1];
+        // 			var imgPath = currImage["filePath"];
+        //             var rating = currImage["rating"];
+        // 			var name = currImage["_id"];
+        // 			// get the filepath of the image
+        // 			console.log(baseURL+name);
+        // 			// nestedAjaxCall(baseURL+name);
+        // 			features.push({
+        // 				position: new google.maps.LatLng(lat, lng),
+        // 				icon: {
+        // 					url: baseURL+name,
+        // 					scaledSize: new google.maps.Size(30,30),
+        // 					origin: new google.maps.Point(0,0), // origin
+    				// 		anchor: new google.maps.Point(0, 0) // anchor
+        // 				},
+        //         stars: rating,
+        //         id: name
+        // 			});
+        // 		}
+        // 		console.log("features length: " + features.length);
+        // 		for (var i = 0, feature; feature = features[i]; i++) {
+        //   			addMarker(feature);
+        // 		}
+        // 	},
+        // 	error: function(e) {
+        // 		console.log("AJAX request failed: " + e);
+        // 	}
+        // });
       }
 
       // Function that filters the images based on who they were uploaded by.
