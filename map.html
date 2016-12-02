@@ -336,7 +336,13 @@
 		  modal.style.display = "none";
 		}
 
-      function addAllPictures() {
+        // initialize features using jquery
+        addAllPictures();
+        // end of init map
+    }
+
+    function addAllPictures() {
+        removeAllMarkers();
         var request = jQuery.ajax({
           url: "https://geopix-bengineering.rhcloud.com/images/all",
           type: "GET",
@@ -381,11 +387,6 @@
 
       }
 
-        // initialize features using jquery
-        addAllPictures();
-        // end of init map
-      }
-
 
       // Function that filters the images based on who they were uploaded by.
       function filterByFriend() {
@@ -408,7 +409,7 @@
           success: function(data) {
             console.log(JSON.parse(JSON.stringify(data)));
             // work with json data to create features
-            removeAllMarkers();
+            // removeAllMarkers();
             for(var i = 0; i < data.length; i++) {
               var currImage = data[i];
               var lat = currImage["location"]["coordinates"][0];
