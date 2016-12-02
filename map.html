@@ -290,6 +290,15 @@
         });
       }
 
+      function removeMarker(imageID) {
+        for(var k = 0; k < features.length; k++) {
+          console.log(features[k].id);
+          if(features[k].id == imageID) {
+            // remove this from the list of markers
+          }
+        }
+      }
+
       function removeAllMarkers() {
         for(var i = 0; i < markerCounter; i++) {
           markers[i].setMap(null);
@@ -390,6 +399,10 @@
 
       // Function that filters the images based on who they were uploaded by.
       function filterByFriend() {
+        // remove existing
+        // add all
+        // filter from all
+        removeAllMarkers();
         var userID = getCookie("id_token");
         console.log("filtering by friend...");
         var friendName = document.getElementById('pac-input').value;
@@ -407,11 +420,13 @@
             console.log("request headers set.");
           },
           success: function(data) {
+            var baseURL = "https://geopix-bengineering.rhcloud.com/images/";
             console.log(JSON.parse(JSON.stringify(data)));
             // work with json data to create features
             // removeAllMarkers();
             for(var i = 0; i < data.length; i++) {
-              var currImage = data[i];
+              // iterate over data, comparing ids
+              // var currImage = data[i];
               var lat = currImage["location"]["coordinates"][0];
               console.log(lat);
               var lng = currImage["location"]["coordinates"][1];
