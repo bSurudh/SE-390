@@ -3,9 +3,12 @@ var initialLocation;
 var features = [];
 var markers = [];
 var pidIDSelected = "null";
-var modal = document.getElementById('myModal');
-var modalImg = document.getElementById("img01");
-var rating = document.getElementById("caption");
+
+// TODO: For some reason, these globals don't work
+// UPDATE: Most likely due to an outdated reference to the element (new variables must be used again)
+// var modal = document.getElementById('myModal');
+// var modalImg = document.getElementById("img01");
+// var rating = document.getElementById("caption");
 
 function removeAllMarkers() {
   for(var i = 0; i < markers.length; i++) {
@@ -29,6 +32,9 @@ function initMap() {
 		mapTypeId: 'roadmap'
 });
 
+  var modal = document.getElementById('myModal');
+  var modalImg = document.getElementById("img01");
+  var rating = document.getElementById("caption");
   var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() { 
@@ -40,6 +46,10 @@ span.onclick = function() {
   addAllPictures();
   // end of init map
 }
+
+var modal = document.getElementById('myModal');
+var modalImg = document.getElementById("img01");
+var rating = document.getElementById("caption");
 
 jQuery("input:radio").click(function() {
 var userID = getCookie("id_token");
