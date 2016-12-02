@@ -324,21 +324,6 @@
 		  modal.style.display = "none";
 		}
 
-      function getCookie(cname) {
-          var name = cname + "=";
-          var ca = document.cookie.split(';');
-          for(var i = 0; i <ca.length; i++) {
-              var c = ca[i];
-              while (c.charAt(0)==' ') {
-                  c = c.substring(1);
-              }
-              if (c.indexOf(name) == 0) {
-                  return c.substring(name.length,c.length);
-              }
-          }
-          return "";
-      }
-
       function addAllPictures() {
         var request = jQuery.ajax({
           url: "https://geopix-bengineering.rhcloud.com/images/all",
@@ -441,6 +426,22 @@
             console.log("AJAX request failed: " + e);
           }
         });
+      }
+
+      
+      function getCookie(cname) {
+          var name = cname + "=";
+          var ca = document.cookie.split(';');
+          for(var i = 0; i <ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0)==' ') {
+                  c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                  return c.substring(name.length,c.length);
+              }
+          }
+          return "";
       }
     </script>
     <script async defer
