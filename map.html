@@ -30,6 +30,7 @@
       }
 
       #pac-input {
+        margin-top: 52px;
         background-color: #fff;
         font-family: Roboto;
         font-size: 15px;
@@ -238,7 +239,7 @@
     <div id="map"></div> -->
 
     <input id="pac-input" class="controls" type="text" placeholder="Filter by Friends...">
-    <input type='submit' onclick="addFriend();" />
+    <input type='submit' onclick="filterByFriend();" />
     <div id="map"></div>
 
     <div id="myModal" class="modal">
@@ -364,6 +365,11 @@
         		console.log("AJAX request failed: " + e);
         	}
         });
+      }
+
+      // Function that filters the images based on who they were uploaded by.
+      function filterByFriend() {
+
       }
     </script>
     <script async defer
