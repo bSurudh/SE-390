@@ -321,8 +321,8 @@
         marker.addListener('click', function() {
           modal.style.display = "block";
           modalImg.src = feature.icon.url;
-          console.log("LOGGING THIS: " + this.rating);
-          // console.log(JSON.parse(JSON.stringify(rating)));
+          var ratingString = "star"+this.rating;
+          console.log(ratingString);
         });
     }
 
