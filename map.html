@@ -294,7 +294,6 @@
         var modal = document.getElementById('myModal');
         var modalImg = document.getElementById("img01");
         var rating = document.getElementById("caption");
-
         var span = document.getElementsByClassName("close")[0];
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() { 
@@ -315,12 +314,14 @@
           position: feature.position,
           // icon: icons[feature.type].icon,
           icon: feature.icon,
-          map: map
+          map: map,
+          rating: feature.stars
         });
         markers.push(marker);
         marker.addListener('click', function() {
           modal.style.display = "block";
           modalImg.src = feature.icon.url;
+          console.log("LOGGING THIS: " + this);
           console.log(JSON.parse(JSON.stringify(rating)));
         });
     }
