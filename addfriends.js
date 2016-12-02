@@ -16,12 +16,6 @@ function addFriend() {
             },
             success: function(data) {
                 console.log("successfully posted data");
-                // var successBox = document.getElementById("success-alert");
-                // successBox.show();
-                // successBox.alert();
-                // successBox.fadeTo(2000,500).slideUp(500, function(){
-                //     successBox.slideUp(500);
-                // });
                 location.reload();
             },
             error: function(e,t) {
