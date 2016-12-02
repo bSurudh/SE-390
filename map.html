@@ -340,7 +340,6 @@
       }
 
       function addAllPictures() {
-        var userID = getCookie("id_token");
         var request = jQuery.ajax({
           url: "https://geopix-bengineering.rhcloud.com/images/all",
           type: "GET",
@@ -392,6 +391,7 @@
 
       // Function that filters the images based on who they were uploaded by.
       function filterByFriend() {
+        var userID = getCookie("id_token");
         console.log("filtering by friend...");
         var friendName = document.getElementById('pac-input').value;
         var baseURL = "https://geopix-bengineering.rhcloud.com/images/user/";
