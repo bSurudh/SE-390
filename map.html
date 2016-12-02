@@ -272,6 +272,21 @@
       var map;
       var initialLocation;
       var features = [];
+
+      function addMarker(feature) {
+        var marker = new google.maps.Marker({
+          position: feature.position,
+          // icon: icons[feature.type].icon,
+          icon: feature.icon,
+          map: map
+        });
+        marker.addListener('click', function() {
+          modal.style.display = "block";
+          modalImg.src = feature.icon.url;
+          console.log(JSON.parse(JSON.stringify(rating)));
+        });
+      }
+      
       function initMap() {
 		initialLocation = new google.maps.LatLng(43.4731225, -80.5436897);
         if (navigator.geolocation) {
@@ -303,21 +318,6 @@
         var modal = document.getElementById('myModal');
         var modalImg = document.getElementById("img01");
         var rating = document.getElementById("caption");
-
-        function addMarker(feature) {
-          var marker = new google.maps.Marker({
-            position: feature.position,
-            // icon: icons[feature.type].icon,
-            icon: feature.icon,
-            map: map
-          });
-          marker.addListener('click', function() {
-          	modal.style.display = "block";
-    		    modalImg.src = feature.icon.url;
-            console.log(JSON.parse(JSON.stringify(rating)));
-          });
-
-        }
 
         var span = document.getElementsByClassName("close")[0];
 		// When the user clicks on <span> (x), close the modal
@@ -375,7 +375,7 @@
         // end of init map
       }
 
-      
+
       // Function that filters the images based on who they were uploaded by.
       function filterByFriend() {
         var userID = getCookie("id_token");
