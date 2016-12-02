@@ -121,8 +121,49 @@
     Successfully added friend!
 </div>
 
-  <script>
+      <div height="50px"></div>
 
+  <div class="jumbotron list-content">
+    
+    <ul class="list-group">
+
+      <li href="#" class="list-group-item title">
+        My Friends
+      </li>
+
+      <!-- <li href="#" class="list-group-item text-left">
+        <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
+        <label class="name">
+            Marko Nerandzic<br>
+        </label>
+        <div class="break"></div>
+      </li>
+
+      <li href="#" class="list-group-item text-left">
+          <img class="img-thumbnail"  src="http://bootdey.com/img/Content/user_1.jpg">
+        <label class="name">
+            Cole Vander Veen
+        </label>
+        <div class="break"></div>
+      </li>
+
+      <li href="#" class="list-group-item text-left">
+          <img class="img-thumbnail"  src="http://bootdey.com/img/Content/user_2.jpg">
+          <label class="name">
+            Ben Morris
+          </label>
+        <div class="break"></div>
+      </li> -->
+
+      <!-- <li href="#" class="list-group-item text-left">
+        <a class="btn btn-block btn-primary">
+            <i class="glyphicon glyphicon-refresh"></i>
+            Load more...
+        </a>
+      </li> -->
+    </ul>
+  </div>
+  <script>
       function addFriend() {
         var friendName = document.getElementById('search').value;
         var baseURL = "https://geopix-bengineering.rhcloud.com/friends/";
@@ -175,7 +216,7 @@
     }
 
         function generateFriendHTML(friendName) {
-            console.log(document.getElementById("friend-list"));
+
             var friendEntry = '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
             friendEntry += friendName;
             friendEntry += '</label><div class="break"></div></li>';
@@ -240,49 +281,6 @@
             }
         });
       </script>
-
-      <div height="50px"></div>
-
-  <div class="jumbotron list-content">
-    
-    <ul id="friend-list" class="list-group">
-
-      <li href="#" class="list-group-item title">
-        My Friends
-      </li>
-
-      <!-- <li href="#" class="list-group-item text-left">
-        <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
-        <label class="name">
-            Marko Nerandzic<br>
-        </label>
-        <div class="break"></div>
-      </li>
-
-      <li href="#" class="list-group-item text-left">
-          <img class="img-thumbnail"  src="http://bootdey.com/img/Content/user_1.jpg">
-        <label class="name">
-            Cole Vander Veen
-        </label>
-        <div class="break"></div>
-      </li>
-
-      <li href="#" class="list-group-item text-left">
-          <img class="img-thumbnail"  src="http://bootdey.com/img/Content/user_2.jpg">
-          <label class="name">
-            Ben Morris
-          </label>
-        <div class="break"></div>
-      </li> -->
-
-      <!-- <li href="#" class="list-group-item text-left">
-        <a class="btn btn-block btn-primary">
-            <i class="glyphicon glyphicon-refresh"></i>
-            Load more...
-        </a>
-      </li> -->
-    </ul>
-  </div>
   </div>
 </div>                                                                                
 	</body>
