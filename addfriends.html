@@ -164,6 +164,16 @@
         return "";
     }
 
+        function generateFriendHTML(friendName) {
+            var list = document.getElementById("friend-list");
+            friendEntry = '<li href="#" class="list-group-item text-left">
+            <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
+            <label class="name">';
+            friendEntry += friendName;
+            friendEntry += '</label><div class="break"></div></li>';
+            list.append(friendEntry);
+        }
+
         function getFriendName(friendID) {
             var baseURL = "https://geopix-bengineering.rhcloud.com/users/";
             var realURL = baseURL+friendID;
@@ -175,9 +185,9 @@
                 contentType: "text/plain",
                 success: function(data) {
                     // for now just log the name to see if it works
-                    console.log(JSON.parse(JSON.stringify(data)));
+                    // console.log(JSON.parse(JSON.stringify(data)));
                     console.log("data[name] = " + data["name"]);
-
+                    generateFriendHTML(data["name"]);
                 },
                 error: function(e,t) {
                     console.log("AJAX friends request failed: " + t + " " + e);
@@ -208,7 +218,6 @@
                 // list of json objects
                 // parse it to get a name
                 // fill field with name
-                friendsList += '<li href="#" class="list-group-item text-left"><img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png"><label class="name">';
                 for(var i = 0; i < data.length; i++) {
                     var currFriendID = data[i]["uidTwo"];
                     console.log(JSON.parse(JSON.stringify(currFriendID)));
@@ -228,22 +237,17 @@
 
   <div class="jumbotron list-content">
     
-    <ul class="list-group">
+    <ul id="friend-list" class="list-group">
 
       <li href="#" class="list-group-item title">
         My Friends
       </li>
 
-      <li href="#" class="list-group-item text-left">
+      <!-- <li href="#" class="list-group-item text-left">
         <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
         <label class="name">
             Marko Nerandzic<br>
         </label>
-<!--         <label class="pull-right">
-            <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
-            <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
-            <a  class="btn btn-info  btn-xs glyphicon glyphicon glyphicon-comment" href="#" title="Send message"></a>
-        </label> -->
         <div class="break"></div>
       </li>
 
@@ -252,11 +256,6 @@
         <label class="name">
             Cole Vander Veen
         </label>
-<!--         <label class="pull-right">
-            <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
-            <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
-            <a  class="btn btn-info  btn-xs glyphicon glyphicon glyphicon-comment" href="#" title="Send message"></a>
-        </label> -->
         <div class="break"></div>
       </li>
 
@@ -265,13 +264,8 @@
           <label class="name">
             Ben Morris
           </label>
-<!--         <label class="pull-right">
-            <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
-            <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
-            <a  class="btn btn-info  btn-xs glyphicon glyphicon glyphicon-comment" href="#" title="Send message"></a>
-        </label> -->
         <div class="break"></div>
-      </li>
+      </li> -->
 
       <!-- <li href="#" class="list-group-item text-left">
         <a class="btn btn-block btn-primary">
