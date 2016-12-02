@@ -256,21 +256,6 @@
       var features = [];
       var markers = [];
 
-      function addMarker(feature) {
-        var marker = new google.maps.Marker({
-          position: feature.position,
-          // icon: icons[feature.type].icon,
-          icon: feature.icon,
-          map: map
-        });
-        markers.push(marker);
-        marker.addListener('click', function() {
-          modal.style.display = "block";
-          modalImg.src = feature.icon.url;
-          console.log(JSON.parse(JSON.stringify(rating)));
-        });
-      }
-
       function removeAllMarkers() {
         for(var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
@@ -279,7 +264,7 @@
       }
 
       function initMap() {
-		initialLocation = new google.maps.LatLng(43.4731225, -80.5436897);
+		    initialLocation = new google.maps.LatLng(43.4731225, -80.5436897);
         if (navigator.geolocation) {
      		navigator.geolocation.getCurrentPosition(function (position) {
 	         	initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -324,6 +309,21 @@
     var modal = document.getElementById('myModal');
     var modalImg = document.getElementById("img01");
     var rating = document.getElementById("caption");
+
+    function addMarker(feature) {
+        var marker = new google.maps.Marker({
+          position: feature.position,
+          // icon: icons[feature.type].icon,
+          icon: feature.icon,
+          map: map
+        });
+        markers.push(marker);
+        marker.addListener('click', function() {
+          modal.style.display = "block";
+          modalImg.src = feature.icon.url;
+          console.log(JSON.parse(JSON.stringify(rating)));
+        });
+    }
 
     function addAllPictures() {
         removeAllMarkers();
