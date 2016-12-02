@@ -209,15 +209,6 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-<!--                     <li>
-                        <a href="#about">About</a>
-                    </li>
-                    <li>
-                        <a href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li> -->
                     <li>
                         <a href="/map.html">Map</a>
                     </li>
@@ -233,10 +224,6 @@
         </div>
         <!-- /.container -->
     </nav>
-
-<!--       <input type="text" name="search" id="search" placeholder="Search..">
-      <input type='submit' onclick="addFriend();" />
-    <div id="map"></div> -->
 
     <input id="pac-input" class="controls" type="text" placeholder="Filter by Friends...">
     <input type='submit' id="friend-search" onclick="filterByFriend();" />
@@ -254,15 +241,10 @@
   	<div id="caption">
         <fieldset class="rating">
     <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-    <!-- <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> -->
     <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-    <!-- <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label> -->
     <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-    <!-- <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label> -->
     <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-    <!-- <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label> -->
     <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-    <!-- <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> -->
 </fieldset>
     </div> 
 	</div>
@@ -273,7 +255,6 @@
       var initialLocation;
       var features = [];
       var markers = [];
-      var markerCounter = 0;
 
       function addMarker(feature) {
         var marker = new google.maps.Marker({
@@ -282,7 +263,7 @@
           icon: feature.icon,
           map: map
         });
-        markers[markerCounter++] = marker;
+        markers.push(marker);
         marker.addListener('click', function() {
           modal.style.display = "block";
           modalImg.src = feature.icon.url;
@@ -290,20 +271,10 @@
         });
       }
 
-      function removeMarker(imageID) {
-        for(var k = 0; k < features.length; k++) {
-          console.log(features[k].id);
-          if(features[k].id == imageID) {
-            // remove this from the list of markers
-          }
-        }
-      }
-
       function removeAllMarkers() {
-        for(var i = 0; i < markerCounter; i++) {
+        for(var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
         }
-        markerCounter = 0;
         features = [];
       }
 
@@ -349,6 +320,10 @@
         addAllPictures();
         // end of init map
     }
+
+    var modal = document.getElementById('myModal');
+    var modalImg = document.getElementById("img01");
+    var rating = document.getElementById("caption");
 
     function addAllPictures() {
         removeAllMarkers();
@@ -399,9 +374,6 @@
 
       // Function that filters the images based on who they were uploaded by.
       function filterByFriend() {
-        // remove existing
-        // add all
-        // filter from all
         removeAllMarkers();
         var userID = getCookie("id_token");
         console.log("filtering by friend...");
