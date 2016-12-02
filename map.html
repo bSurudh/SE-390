@@ -295,6 +295,7 @@
           markers[i].setMap(null);
         }
         markerCounter = 0;
+        features = [];
       }
 
       function initMap() {
@@ -392,8 +393,9 @@
         console.log("filtering by friend...");
         var friendName = document.getElementById('pac-input').value;
         var baseURL = "https://geopix-bengineering.rhcloud.com/images/user/";
+        console.log(baseURL + friendName);
         var request = jQuery.ajax({
-          url: baseURL,
+          url: baseURL + friendName,
           type: "GET",
           dataType: "JSON",
           contentType: "text/plain",
